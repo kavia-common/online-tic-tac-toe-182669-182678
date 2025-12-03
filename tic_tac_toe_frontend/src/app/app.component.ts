@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
+import { BoardComponent } from './components/board/board.component';
+import { StatusBarComponent } from './components/status-bar/status-bar.component';
+import { ControlsComponent } from './components/controls/controls.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  standalone: true,
+  imports: [BoardComponent, StatusBarComponent, ControlsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'tic_tac_toe_frontend is being generated';
+  // PUBLIC_INTERFACE
+  title = 'Tic Tac Toe';
 }
