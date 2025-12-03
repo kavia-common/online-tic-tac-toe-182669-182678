@@ -1,6 +1,6 @@
 import { Component, computed } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { GameService } from '../../services/game.service';
+import { GameService, Player } from '../../services/game.service';
 
 @Component({
   selector: 'app-status-bar',
@@ -9,11 +9,11 @@ import { GameService } from '../../services/game.service';
   template: `
     <div class="status">
       <span *ngIf="!game.winner() && !game.isDraw(); else endBlock">
-        Turn: <strong>{{ game.currentPlayer() }}</strong>
+        Turn: <strong>{{ playerLabel(game.currentPlayer()) }}</strong>
       </span>
       <ng-template #endBlock>
         <span *ngIf="game.winner(); else drawBlock" class="winner">
-          Winner: <strong>{{ game.winner() }}</strong>
+          Winner: <strong>{{ playerLabel(game.winner()) }}</strong>
         </span>
         <ng-template #drawBlock>
           <span class="draw">It's a draw!</span>
@@ -39,4 +39,11 @@ import { GameService } from '../../services/game.service';
 })
 export class StatusBarComponent {
   constructor(public game: GameService) {}
+
+  // PUBLIC_INTERFACE
+  playerLabel(p: Player): string {
+    if (p === 'X') return 'Knight';
+    if (p === 'O') return 'Queen';
+    return '';
+  }
 }
